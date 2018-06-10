@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/magic/1.1.0/magic.css">
+  <style>
+
+  </style>
+</head>
+<body>
+    <div id="app">
+        <light-bulb></light-bulb>
+        <light-bulb></light-bulb>
+        <light-bulb></light-bulb>
+        <light-bulb2></light-bulb2>
+        <light-bulb2></light-bulb2>
+        <light-bulb2></light-bulb2>
+        <light-bulb3></light-bulb3>
+    </div>
+  <script>
+    Vue.component('light-bulb',{
+        template:`
+        <div class='light-bulb'>
+        <p>💡Eureka!</p>
+      </div>
+        `
+    })
+    Vue.component('light-bulb3',{
+        functional:true, render(h){//createElement > h
+            //return createElement(
+            return h(
+                'div',
+                {class:'light-bulb'},
+                [
+                    h('p','💗 Growing Heart!')
+                ]
+            )
+        }
+    })
+
+    var lighhtBulb2 = {
+        template:`
+            <div class='light-bulb'>
+                <p>💡Eureka!!!!!!!</p>
+            </div>
+        `
+    }
+    var app = new Vue({
+        el: '#app',
+        components:{
+            'light-bulb2' : lighhtBulb2
+        }
+
+
+    })
+  </script>
+</body>
+</html>

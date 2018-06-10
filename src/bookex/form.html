@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    label{display:block}
+  </style>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <!-- 프린트 목록의 위치 -->
+            <legend>What printers you want to use?</legend>
+            <label>
+                <input type="checkbox" v-model="outputPrinter" value="monochrome">Monochrome
+            </label>
+            <label>
+                <input type="checkbox" v-model="outputPrinter" value="plasma">Plasma Color
+            </label>
+            <label>
+                <input type="checkbox" v-model="outputPrinter" value="cloner">3D DNA Cloner
+            </label>
+            <input type="submit" value="Print now" @click.prevent="printHandler">
+        </form>
+        <div>{{outputPrinter}}</div>
+    </div>
+    
+  <script>
+
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            outputPrinter : []
+        },
+        methods:{
+            printHandler(){
+                let printers = this.outputPrinter
+                alert('Printing with : ' + 
+                    (printers.length ? printers.join(', ') : 'none') + '.')
+            }
+        }
+    })
+  </script>
+</body>
+</html>

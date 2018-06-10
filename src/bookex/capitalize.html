@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{'hello world' | capitalize}}
+  </div>
+
+  <script>
+    Vue.filter('capitalize', function (string) {
+      var capitalFirst = string.charAt(0).toUpperCase()
+      var noCaseTail = string.slice(1, string.length)
+      return capitalFirst + noCaseTail
+      // ES6 transfer
+      // var [first, ...tail] =  string
+      // return first.toUpperCase() + tail.join(',')
+    })
+    new Vue({el:'#app'})
+  </script>
+</body>
+</html>

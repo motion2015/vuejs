@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="toast">Toast bread</button>
+        <input v-model="toastedBreads " /><br/>
+        Quantity to put in the oven : {{toastedBreads}}
+    </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      methods: {
+        toast() {
+          this.toastedBreads++
+        }
+      },
+      data:{
+      toastedBreads: 0
+      }
+    })
+  </script>
+</body>
+
+</html>

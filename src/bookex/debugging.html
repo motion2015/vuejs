@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+   Cat  object : {{cat}}
+  </div>
+
+  <script>
+    //  Vue.filter('json', value => { return JSON.stringify(value, null, 2) } )
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+    		cat : {
+          sound :'meow'
+        }
+    	}
+    })
+  </script>
+</body>
+</html>

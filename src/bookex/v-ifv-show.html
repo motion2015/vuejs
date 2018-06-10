@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.js"></script>
+  <style>
+
+  </style>
+</head>
+<body>
+    <div id="app">
+       <div v-show="isNight">I'm a ghost ! Boo!</div>
+    </div>
+
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	// data:{
+        //     isNight : true
+        // },
+        computed:{
+            isNight(){
+                //return (new Date('4 January 03:30')).getHours() < 7
+                return new Date().getHours() < 7
+            }
+        }
+
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    label{display:block}
+  </style>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <legend>Today's animals</legend>
+            <label>
+                <input type="radio" v-model="animal" :value="animals[i]">{{animals[i]}}
+            </label>
+            <label>
+                <input type="radio" v-model="animal" :value="animals[i+1]">{{animals[i+1]}}
+            </label>
+            <label>
+                <input type="radio" v-model="animal" :value="animals[i+2]">{{animals[i+2]}}
+            </label>
+            <input type="submit" value="Add to Form" @click.prevent="addToForm">
+            
+        </form>
+        <div>Your farm is composed by {{ farm.join(' ') }} {{ farm.length }}</div>
+    </div>
+    
+  <script>
+
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            animals : ['🐯','🐴','🐷'],
+            animal: undefined,
+            farm: [],
+            i : 0
+        },
+        methods:{
+            addToForm(){
+                if (this.animal === undefined){ return }
+                this.farm.push(this.animal)
+                this.i =  Math.floor(Math.random() * (this.animals.length -2))
+                this.animal = undefined
+            }
+        }
+    })
+  </script>
+</body>
+</html>

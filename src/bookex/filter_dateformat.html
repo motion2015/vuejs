@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.js"></script>
+  <style>
+  .tbl_txt {border-top:1px solid #dddddd;border-bottom:1px solid #f0f0f0;}
+.tbl_txt table {width:100%;table-layout:fixed;border-collapse:collapse;}
+.tbl_txt table thead th {padding:17px 0 16px 0px;border-bottom:1px solid #dddddd;color:#888888;font-weight:normal;text-align:left;vertical-align:top}
+.tbl_txt table thead .tc th {text-align:center;}/*2018-04-11 KTH*/
+.tbl_txt table.tbl_ct th {text-align:center;}/* 2018-03-16 JMJ */
+.tbl_txt table tbody th {padding:17px 20px 16px;border-top:1px solid #f0f0f0;color:#888888;text-align:left}
+.tbl_txt table tbody tr th:first-child{padding-left:0;}
+.tbl_txt table td {padding:20px 0 20px 0px;border-top:1px solid #f0f0f0;color:#666666;line-height:19px;vertical-align:top}/*공통 수정 결함 964*/
+.tbl_txt table tbody .tc {text-align:center;}/*2018-04-11 KTH*/
+.tbl_txt table tbody .la_txt {padding-left:10px;}/*2018-04-11 KTH*/
+.tbl_txt table.tbl_ct td {text-align:center;}/* 2018-03-16 JMJ */
+.tbl_txt table.tbl_ct td.right {text-align:right !important;}/* 2018-03-16 JMJ */
+.tbl_txt table tbody tr:first-child th, .tbl_txt table tbody tr:first-child td {border-top:none;}
+.tbl_txt table th.num, .tbl_txt table td.num {padding:17px 0 16px 20px;text-align:center;}
+.tbl_txt table td strong {color:#333333}
+.tbl_txt table td strong.bold {color:#666666;font-family:'HYBold'}
+
+
+.price{text-align: right}
+  </style>
+</head>
+<body>
+    <div id="app">
+       The Stroming of the Bastille, happened on {{bastilleStromingDate | date('fr')}}
+    </div>
+
+  <script>
+    Vue.filter('date', function(date, locale){
+        moment.locale(locale)
+        return moment(date).format('LL')
+    })
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            bastilleStromingDate : '1789-07-14 17 h'
+        }
+
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/animate.css@3.5.1/animate.min.css">
+  <style>
+    p{font-size:3em;color:blue;}
+    @keyframes rumble {
+      10% {
+        margin-top: 20px
+      }
+      20% {
+        margin-top: 15px
+      }
+      30% {
+        margin-top: 20px
+      }
+      40% {
+        margin-top: 15px
+      }
+      100% {
+        margin-top: none
+      }
+    }
+    
+    .mySlideInRight {
+      transform: translateX(100%);
+    }
+    
+    .go {
+      transition: all 2s ease-out;
+      animation: rumble .5s linear 4;}
+  </style>
+</head>
+<body>
+    <div id="app">
+     <button @click="texiCalled=true">Call a cab</button>
+     <!-- <transition name="custom-classes-transition" enter-active-class="animated slideInRight"> -->
+     <transition name="custom-classes-transition" enter-class="mySlideInRight" enter-active-class="go">
+            <p v-if="texiCalled">🚕</p>
+     </transition>
+     
+    </div>
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            texiCalled : false
+        }
+
+    })
+  </script>
+</body>
+</html>

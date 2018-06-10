@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    #tree{
+        position:absolute;left:7.5em; top:0em; cursor: pointer;
+    }
+    .fade-leave-active{transition: opacity .5s; opacity: 0;}
+
+  </style>
+</head>
+<body>
+    <!-- <div id="app" v-html="htmlTexts[2]"> -->
+    <div id="app">
+     <!-- {{htmlTexts[0]}} -->
+     <thanks gift="Batman" decoration="strong"></thanks>
+    </div>
+  <script>
+    Vue.component('thanks',{
+        functional :true,
+        render: function(createElement, context){
+            let  decoratedGift = 
+                createElement(context.props.decoration, context.props.gift)
+            return createElement('p', ['Dear John, thanks for ', decoratedGift])
+        },
+        props:{
+            gift:String,
+            decoration:String
+        }
+    })
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            htmlTexts : [
+                `Dear John, <br/> thank you for the <pre>Batman vs Superman</pre> DVD!`,
+                'Dear John, <br/> thank you for the <i>Ghostbusters 3</i> DVD!',
+                'Dear John, <br/> thank you for the <b>Gods of Egypt</b> is my new favourite!'
+            ]
+        }
+
+    })
+  </script>
+</body>
+</html>

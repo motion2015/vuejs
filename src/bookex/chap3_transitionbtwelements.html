@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  <style>
+    .fade-enter-active,.fade-leave-active {transition: opacity .5s}
+    .fade-enter,.fade-leave-active {opacity :0}
+    p, span{margin:0;position:absolute;font-size: 3em;display:block;}
+  </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="kisses++">💋 Kiss!</button>
+        <!-- <transition name="fade">
+           <p v-if="kisses < 3 " key="frog">🐸 frog</p>
+           <p v-if="kisses >= 3 && kisses <=5" key="princess">👸 princess</p>
+           <p v-else key="danta">🎅 Santa Claus</p>
+        </transition> -->
+        <transition name="fade">
+            <p :key="transformation">{{emoji}} {{transformation}}</p>
+        </transition>
+    </div>
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data: {
+            kisses: 0,
+            kindOfTransformation: 'fade',
+            transformationMode: 'in-out'
+        },
+        computed:{
+            transformation(){
+                if(this.kisses <3 ){
+                    return 'frog'
+                }
+                if(this.kisses >=3 && this.kisses <=5 ){
+                    return 'princesss'
+                }
+                if(this.kisses >5 ){
+                    this.kindOfTransformation = 'zoom'
+                    this.transformationMode = 'out-in'
+                    return 'santa'
+                }
+            },
+            emoji(){
+                switch (this.transformation) {
+                    case 'frog' : return '🐸'
+                    case 'princesss' : return '👸'
+                    case 'santa' : return '🎅'
+                }
+            }
+        }
+
+    })
+  </script>
+</body>
+</html>

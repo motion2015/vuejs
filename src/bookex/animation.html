@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    #solution{cursor:pointer}
+    .fade-enter{opacity: 0;}
+    .fade-enter-active {opacity: .5; transition: opacity  .5s}
+
+  </style>
+</head>
+<body>
+    <div id="app">
+     <article>
+         They call me fruit.<br>
+         They call me fish.<br>
+         They call me insect.<br>
+         But actually I'm not one of those.
+         <div id="solution" @click="showSolution=true">
+             I am a <transition name="fade">
+                 <span id="dragon" v-show="showSolution">Dragon</span>
+                </transition>
+         </div>
+     </article>
+    </div>
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            showSolution : false
+        }
+
+    })
+  </script>
+</body>
+</html>

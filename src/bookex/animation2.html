@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    #tree{
+        position:absolute;left:7.5em; top:0em; cursor: pointer;
+    }
+    .fade-leave-active{transition: opacity .5s; opacity: 0;}
+
+  </style>
+</head>
+<body>
+    <div id="app">
+     <p>
+         Transition are awesome, careful<br/>
+         please don't use them always.
+     </p>
+     <transition name="fade">
+        <img id="tree" src="http://i.imgur.com/QDpnaIE.png" v-show="show" @click="show= false"/>
+     </transition>
+    </div>
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            show : true
+        }
+
+    })
+  </script>
+</body>
+</html>

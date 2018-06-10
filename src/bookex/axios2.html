@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>5.1</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <table>
+        <thead>
+            <tr>
+            <th>No</th><th>스크립트</th><th>생성시간</th><th>설명</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(value, index ) in tt" v-bind:key="index">
+        <td >{{value.sid}}</td><td >{{value.name}}</td><td >{{value.time}}</td> <td >{{value.discription}} <button @click="editbtn(value,index)">edit</button><button @click="delbtn(index)">del</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <div v-bind="tt">
+        <p>스크립트명 <input v-model="tt.name"></p>
+        <p>설명 <input v-model="tt.discription"></p>
+        <p>스크립트 <input v-model="tt.note"></p>
+    </div>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        advice: 'loading...',
+        tt:[]
+      },
+      created () {
+        axios.get('./api/equivement.json')
+          .then(response => {
+              console.log(response)
+            this.tt = response.data.items                   
+          })
+          .catch(error => {
+            this.advice = 'There was an error: ' + error.message
+          })
+      },
+      methods:{
+        editbtn(val,id){
+            console.log("edit " + id+ "edit " + val.name)
+        },
+        delbtn(id){
+            console.log("del " + id)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

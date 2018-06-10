@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+  <style>
+    .ball {
+            width: 3em;
+            height: 3em;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            left: 12em;
+        }
+  </style>
+</head>
+<body>
+    <div id="app">
+            <input type="number" @change="move">
+            <div class="ball" :style="'top: ' + height + 'em'"></div>
+            <!-- <input v-model.number="enteredHeight" type="number">
+            <div class="ball" :style="'top: ' + height + 'em'"></div> -->
+    </div>
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data: {
+            enteredHeight: 0,
+                height: 0
+            },
+        methods :{
+            move(event){
+                const newHeight = Number(event.target.value);
+                const _this = this
+                const animate = (time) =>{
+                    requestAnimationFrame(animate)
+                    TWEEN.update(time)
+                }
+                new TWEEN.Tween({ H: this.height})
+                .easing(TWEEN.Easing.Bounce.Out)
+                .to({H:newHeight}, 1000)
+                .onUpdate(function(){
+                    _this.height = this.H
+                })
+                .start()
+                animate()
+            }
+        },
+        watch: {
+            enteredHeight(newHeight, oldHeight) {
+                const _this = this
+                const animate = (time) => {
+                    requestAnimationFrame(animate)
+                    TWEEN.update(time)
+                }
+                new TWEEN.Tween({
+                        H: this.height
+                    })
+                    .easing(TWEEN.Easing.Quadratic.Out)
+                    .to({
+                        H: newHeight
+                    }, 500)
+                    .onUpdate(function() {
+                        _this.height = this.H
+                    })
+                    .start()
+                animate()
+            }
+        }
+
+    })
+  </script>
+</body>
+</html>

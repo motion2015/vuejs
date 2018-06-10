@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+   <ul>
+   	<li v-for="(world, i) in worlds">
+        {{world}}
+        <button @click="worlds.splice(i, 1)">Zap!</button>
+       </li>
+   </ul>
+   <input v-model="newWorld">
+   <button @click="worlds.push(newWorld)">Conquer</button>
+  </div>
+
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+    		worlds:['Terran','L24-D','Ares','New Kroy','Sebek','Verstra'],
+            newWorld:''
+    	}
+    })
+  </script>
+</body>
+</html>

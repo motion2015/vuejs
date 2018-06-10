@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/magic/1.1.0/magic.css">
+  <style>
+
+  </style>
+</head>
+<body>
+    <div id="app">
+        <label>Sound level</label>
+        <input type="number" v-model.number="soundLevel" max="3" min="0">
+        <sound-icon :level="soundLevel"></sound-icon> 
+
+    </div>
+  <script>
+    Vue.component('sound-icon',{
+        template:`
+        <span>{{soundEmojis [level]}}</span>
+        `,
+        props:['level'],
+        data(){
+            return {
+                soundEmojis: ['⛔', '🔊', '📢', '📣']
+            }
+        }
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data:{
+            soundLevel : 0
+        }
+
+
+    })
+  </script>
+</body>
+</html>

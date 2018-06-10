@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    label{display:block}
+  </style>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <legend>Choose your country</legend>
+            <select v-model="choosenCountry">
+                <option>Japan</option>
+                <option value="2">India</option>
+                <option value="7">Canada</option>
+            </select>
+            
+            
+        </form>
+        <div>{{ choosenCountry }}</div>
+    </div>
+    
+  <script>
+
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            choosenCountry: undefined
+        },
+        methods:{
+            addToForm(){
+                if (this.animal === undefined){ return }
+                this.farm.push(this.animal)
+                this.i =  Math.floor(Math.random() * (this.animals.length -2))
+                this.animal = undefined
+            }
+        }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+   <input type="text" v-model="name" />
+   <input type="text" id="surname" value="Snow"/>
+   <button @click="saveSurname">Save Surname</button>
+   <output>{{computedFullName}}</output>
+  </div>
+
+  <script>
+    let  surname = "Snow"
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+    		name: 'John'
+        },
+        computed:{
+            computedFullName(){
+                return this.name + ' ' + surname
+            }
+        },
+        methods:{
+            saveSurname(){
+                surname = this.$el.querySelector('#surname').value
+            }
+        }
+    })
+  </script>
+</body>
+</html>

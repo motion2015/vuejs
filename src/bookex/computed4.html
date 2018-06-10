@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>List of expensive experiments</h3>
+        <ul>
+            <!-- <li v-for="exp in nonPhysics(lowCost(experiments))"> -->
+            <li v-for="exp in filteredExperiments">
+            {{exp.name}} ({{exp.cost}}m €)
+            </li>
+        </ul>
+        <input v-model="term">
+    </div>
+
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            term:'',
+    		experiments: [
+                {name: 'RHIC Ion Collider', cost: 650, field: 'Physics'},
+                {name: 'Neptune Undersea Observatory', cost: 100, field: 'Biology'},
+                {name: 'Violinist in the Metro', cost: 3, field: 'Psychology'},
+                {name: 'Large Hadron Collider', cost: 7700, field: 'Physics'},
+                {name: 'DIY Particle Detector', cost: 0, field: 'Physics'}
+                ]
+        },
+        computed: {
+        filteredExperiments () {
+            return this.lowCost(this.nonPhysics(this.experiments))
+        },
+        // nonPhysics () {
+        //     return this.experiments.filter(exp => exp.field !== 'Physics')
+        // },
+        allExceptTerm(){
+            return this.experiments.filter(exp => exp.field.indexOf(this.term)>= 0)
+        }
+        
+    }, 
+    methods: {
+        nonPhysics (list) {
+            return list.filter(exp => exp.field !== 'Physics')
+        },
+        lowCost (list) {
+            return list.filter(exp => exp.cost <= 3)
+        }
+    }
+    })
+  </script>
+</body>
+</html>

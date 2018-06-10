@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ 
+  <style>
+    .warn{background-color: mistyrose}
+    textarea{width:80%;height:100px}
+  </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Bitcoin Price Index</h1>
+      
+        <section v-if="errored">
+          <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+        </section>
+      
+        <section v-else>
+          <div v-if="loading">Loading...</div>
+          <div v-else v-for="(equi,index) in info" class="currency">
+            {{ equi.name }}
+            <span class="lighten">
+              <span v-html="equi.time"></span>  {{ equi.discription }}
+            </span>
+            <button v-on:click="deleteBtn(index)">X</button>
+          </div>
+          
+        </section>
+      </div>
+  <script>
+    new Vue({
+  el: '#app',
+  data () {
+    return {
+      info: null,
+      loading: true,
+      errored: false
+    }
+  },
+  filters: {
+    currencydecimal (value) {
+      return value.toFixed(2)
+    }
+  },
+  mounted () {
+    axios
+      .get('./api/equivement.json')
+      .then(response => {
+        this.info = response.data.items
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false)
+  },
+  methods: {
+    deleteBtn(index){
+      axios
+      .delete('./api/equivement.json/'+ index)
+      .then(response => {
+        this.info = response.data.items
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+      .finally(() => this.loading = false)
+    }
+  }
+})
+  </script>
+</body>
+</html>

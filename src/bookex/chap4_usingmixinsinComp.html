@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex"></script>
+  <style>
+.super{filter:hue-rotate(120deg)}
+  
+  </style>
+</head>
+<body>
+    <div id="app">
+        <man></man>
+        <woman></woman>
+        <greeter></greeter>
+        <super-greeter></super-greeter>
+    </div>
+  <script>
+    var Greeter = {
+        template: `
+        <p>{{message}}<button @click="greet">greet</button></p>
+        `,
+        data(){
+            return {
+                message :'...'
+            }
+        },
+        methods:{
+            greet(){
+                this.message ='Hello'
+            }
+        }
+    }
+    var SuperGreeter = {
+        mixins : [Greeter],
+        template: `
+        <p>{{message}}<button @click="greetGreet">supergreet</button></p>
+        `,
+        methods:{
+            greetGreet(){
+                this.message ='SUPER Hello'
+            }
+        }
+    }
+    
+    
+
+
+      var superPowerMixin = {
+          data(){
+              return {
+                  superPowers :false
+              }
+          },
+          methods:{
+            showMe(){
+                  this.$el.classList.add("super")
+                  this.superPowers = true
+              }
+          },
+          created(){
+              this.$options.template = 
+              `<div><h3 v-show="superPowers">super</h3>` +
+              this.$options.template + 
+              `<button @click="showMe" v-if="!superPowers">
+              super!
+              </button></div>` 
+          }
+      }
+      Vue.component('man', {
+        template: '<p>👨man</p>',
+        mixins : [superPowerMixin]
+      })
+      Vue.component('woman', {
+        template: '<p>👩woman</p>',
+        mixins : [superPowerMixin]
+      })
+    new Vue({
+      el: '#app',
+      components:{
+          Greeter, SuperGreeter
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vuex"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <style>
+.super{filter:hue-rotate(120deg)}
+  
+  </style>
+</head>
+<body>
+    <div id="app">
+      <h2>Advice of the day</h2>
+      <p>{{advice}}</p>
+    </div>
+  
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          advice: 'loading...'
+        },
+        created () {
+          axios.get('http://api.adviceslip.com/advice')
+            .then(response => {
+              console.log(response)
+              this.advice = response.data.slip.advice
+            })
+            .catch(error => {
+              this.advice = 'There was an error: ' + error.message
+            })
+        }
+      })
+    </script>
+  </body>
+</html>

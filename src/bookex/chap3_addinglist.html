@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <style>
+    .v-leave-active {
+        transition: all 1s;
+        opacity: 0;
+        transform: translateY(-15px);
+        }
+  </style>
+</head>
+<body>
+    <div id="app">
+        <h3>Syllabus</h3>
+        <transition-group tag="ul">
+            <li v-for="topic in syllabus" :key="topic">
+            <button @click="completed(topic)">Done</button> {{topic}}
+            </li>
+        </transition-group>
+    </div>
+  <script>
+    var app = new Vue({
+    	el: '#app',
+    	data: {
+            syllabus: [
+                'HTML',
+                'CSS',
+                'Scratch',
+                'JavaScript',
+                'Python'
+                ]
+        },
+        methods:{
+            completed (topic) {
+                let index = this.syllabus.indexOf(topic)
+                this.syllabus.splice(index, 1)
+            }
+        }
+
+    })
+  </script>
+</body>
+</html>

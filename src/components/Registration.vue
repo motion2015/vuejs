@@ -11,11 +11,20 @@
 
 <script>
     export default {
-        props: ['usersAttrN'],
+        // props: ['usersAttrN'],
+        computed: {
+            usersAttrN() {
+                return this.$store.state.users.filter(user => {
+                    return !user.registered;
+                })
+            }
+        },
         methods: {
             registerUser(user) {
-                this.$emit('userRegistered', user);
+                // this.$emit('userRegistered', user);
+                 const date = new Date;
                 user.registered = true;
+                this.$store.state.registrationss.push({userId: user.id, name: user.name, date: date.getFullYear() + '/' + (date.getMonth()+1) + '/' + date.getDate()})
             }
         }
     }

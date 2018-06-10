@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    label{display:block}
+  </style>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <!-- 프린트 목록의 위치 -->
+            <legend>Choose your gender</legend>
+            <label>
+                <input type="radio" v-model="gender" :value="genders[0]">Male
+            </label>
+            <label>
+                <input type="radio" v-model="gender" :value="genders[1]">Female
+            </label>
+            <label>
+                <input type="radio" v-model="gender" :value="genders[2]">Alien
+            </label>
+            
+        </form>
+        <div>Choosen gender : '{{ gender }}'</div>
+    </div>
+    
+  <script>
+
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            genders : ['male','female','alien'],
+            gender: undefined
+        },
+        methods:{
+            printHandler(){
+                let printers = this.outputPrinter
+                alert('Printing with : ' + 
+                    (printers.length ? printers.join(', ') : 'none') + '.')
+            }
+        }
+    })
+  </script>
+</body>
+</html>

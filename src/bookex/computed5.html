@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="js/accounting.js"></script>
+  <style>
+  .tbl_txt {border-top:1px solid #dddddd;border-bottom:1px solid #f0f0f0;}
+.tbl_txt table {width:100%;table-layout:fixed;border-collapse:collapse;}
+.tbl_txt table thead th {padding:17px 0 16px 0px;border-bottom:1px solid #dddddd;color:#888888;font-weight:normal;text-align:left;vertical-align:top}
+.tbl_txt table thead .tc th {text-align:center;}/*2018-04-11 KTH*/
+.tbl_txt table.tbl_ct th {text-align:center;}/* 2018-03-16 JMJ */
+.tbl_txt table tbody th {padding:17px 20px 16px;border-top:1px solid #f0f0f0;color:#888888;text-align:left}
+.tbl_txt table tbody tr th:first-child{padding-left:0;}
+.tbl_txt table td {padding:20px 0 20px 0px;border-top:1px solid #f0f0f0;color:#666666;line-height:19px;vertical-align:top}/*공통 수정 결함 964*/
+.tbl_txt table tbody .tc {text-align:center;}/*2018-04-11 KTH*/
+.tbl_txt table tbody .la_txt {padding-left:10px;}/*2018-04-11 KTH*/
+.tbl_txt table.tbl_ct td {text-align:center;}/* 2018-03-16 JMJ */
+.tbl_txt table.tbl_ct td.right {text-align:right !important;}/* 2018-03-16 JMJ */
+.tbl_txt table tbody tr:first-child th, .tbl_txt table tbody tr:first-child td {border-top:none;}
+.tbl_txt table th.num, .tbl_txt table td.num {padding:17px 0 16px 20px;text-align:center;}
+.tbl_txt table td strong {color:#333333}
+.tbl_txt table td strong.bold {color:#666666;font-family:'HYBold'}
+
+
+.ascending:after{
+    content:" \25B2"
+}
+.descending:after{
+    content:" \25BC"
+}
+  </style>
+</head>
+<body>
+    <div id="app">
+       <div class="tbl_txt">
+        <table >
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th v-bind:class="order === 1 ? 'descending':'ascending'" @click="sort">Electricity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="dam in damsByElectricity">
+                    <td>{{dam.name}}</td>
+                    <td>{{dam.country}}</td>
+                    <td>{{dam.electricity}} MegaWatts</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        </div>
+        <p>I have  {{ 4545454545 | number }} in my pocket</p>
+    </div>
+
+  <script>
+    Vue.filter('currency', function(money){
+        return accounting.formatMoney(money)
+    })
+    Vue.filter('number', function(money){
+        return accounting.formatNumber(money)
+    })
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+            dams: [
+                {name: 'Nurek Dam', country: 'Tajikistan', electricity: 3200},
+                {name: 'Three Gorges Dam', country: 'China', electricity: 22500},
+                {name: 'Tarbela Dam', country: 'Pakistan', electricity: 3500},
+                {name: 'Guri Dam', country: 'Venezuela', electricity: 10200}
+            ],
+            order:1 //means  ascending
+        },
+        computed: {
+            damsByElectricity(){
+                return this.dams.sort((d1,d2) => (d2.electricity -d1.electricity) * this.order);
+            }
+        },
+        methods: {
+            sort(){
+                this.order = this.order * -1
+            }
+        }
+
+    })
+  </script>
+</body>
+</html>
