@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+    .red{color:#f00}
+    .blue{color:#00f}
+
+  </style>
+</head>
+<body>
+    <section id="app">
+      <h1>{{title}}</h1>
+      <button @click="title='woo vuejs'">change title</button>
+      <button @click="changeTitle">change title2</button>
+      <input type="text" v-on:input="cssClass=$event.target.value">
+      <p v-bind:class="cssClass">class : {{cssClass}}</p>
+    </section>
+    <hr>
+      <section id="app2">
+        <button v-on:click="increment">Increment</button>
+        <p>Counter: {{counter}}</p>
+        <p>Clicks: {{clicks}}</p>
+      </section>
+      <hr>
+      <section id="app3">
+          <button v-on:click="show=!show">Show / Hide</button>
+          <p v-if="show">I'm part-time visible!</p>
+          <p v-else>Am I visible?</p>
+          <p v-show="show">Hurray, I'm here!</p>
+          <hr>
+          <ul>
+            <li v-for="(person, index) in persons">{{person.name}} - {{index}}</li>
+          </ul>
+        </section>
+        <hr>
+        <section id="app4">
+            <p>{{theTitle}}</p>
+            <p>{{title | uppercase | lowercase}}</p>
+            <p>{{message | uppercase}}</p>
+        </section>
+   
+  <script>
+    Vue.filter('uppercase', function(value){
+      return value.toUpperCase();
+    })
+    var app4 = new Vue({
+    	el: '#app4',
+    	data:{
+        title:'hello world!' ,
+        message:'somethng'       
+      },
+      computed :{
+        theTitle :function(){
+          return this.title.toUpperCase()
+        },
+      },
+      filters :{
+        lowercase:function(value){
+          return value.toLowerCase()
+        }
+      }
+    })
+    var app3 = new Vue({
+    	el: '#app3',
+    	data:{
+        show:true,
+        persons:[
+          { name: 'Max', age: 27 },
+          { name: 'Chris', age: 30 },
+          { name: 'Nora', age: 25 }
+        ]
+      }
+    })
+    var app2 = new Vue({
+    	el: '#app2',
+    	data:{
+        clicks:0
+        },
+        methods:{
+          increment (){
+            this.clicks  ++; 
+            //this.counter = this.clicks *2;
+           }
+        },
+        computed:{
+          counter() {
+            return this.clicks *2
+          } 
+        }
+    })
+    var app = new Vue({
+    	el: '#app',
+    	data:{
+        cssClass:'',
+        title: 'what about vue?',
+        },
+        methods:{
+          changeTitle () {
+            this.title = 'change Title'
+          }
+        }
+    })
+    
+  </script>
+</body>
+</html>

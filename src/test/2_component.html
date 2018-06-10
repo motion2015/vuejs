@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue.js app</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+ 
+  <style>
+.user {border:1px solid #ccc;background-color:white; padding:10px;margin-bottom: 10px;}
+.todo {border:1px solid #eee;background-color:rgb(180, 231, 85); padding:10px;margin-bottom: 10px;}
+  </style>
+</head>
+<body>
+    <section id="app">
+      <h1>{{title}}</h1>
+      <hr>
+      <app-user></app-user>
+      <app-user2></app-user2>
+    </section>
+    
+   
+  <script>
+    Vue.component('app-user',{
+        data: function(){
+            return {
+                    users: [
+                        {username:'Max'},
+                        {username:'Chris'},
+                        {username:'Anna'}
+                    ]
+            }
+        },
+        template:`<div><div class="user" v-for="user in users">
+          <p>Username : {{user.username}}</p>
+      </div></div>`
+    })
+    var app = new Vue({
+            el: '#app',
+            data:{
+            title:'Hello World!'        
+        },
+        components :{
+            'app-user2':{
+            data: function(){
+                return {
+                        todos: [
+                            {todo:'vuejs'},
+                            {todo:'함수형 자바스크립트'},
+                            {todo:'E6'}
+                        ]
+                }
+            },
+            template:`<div><div class="todo" v-for="item in todos">
+                <p>Todo : {{item.todo}}</p>
+            </div></div>`
+            }
+        }
+    })
+    
+  </script>
+</body>
+</html>
