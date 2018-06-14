@@ -22,7 +22,16 @@
     </li>
   </ul>
   <button class="btn btn-default" v-on:click="reverseOrder">Reverse Order</button>
-
+  <div class="form-group">
+      <label for="query">
+          what are you looking for?
+      </label>
+      <input v-model="query" calss="form-control">
+  </div>
+  <h3>Search results:</h3>
+  <ul class="list-group">
+      <li v-for="story in search" class="list-group-item">{{story.write}}  said  "{{story.plot}}"</li>
+  </ul>
   <pre>
     {{ $data }}
   </pre>
@@ -56,7 +65,8 @@
         upvotes: 74
       },
       ],
-      order : 'desc'
+      order : 'desc',
+      query:''
     },
     methods: {
       reverseOrder: function () {
@@ -67,6 +77,12 @@
       orderedStories: function () {
         var order = this.order
         return _.orderBy(this.stories, 'upvotes', [order])
+      },
+      search: function () {
+          var query = this.query
+          return this.stories.filter(function (story) {
+              return story.plot.includes(query)
+          })
       }
     }
   })
