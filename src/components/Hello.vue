@@ -1,8 +1,6 @@
 <template>
     <div classs="hello">
-        <app-message></app-message>
-        <app-2></app-2>
-        {{mag}}
+        <h3>{{mag}}</h3>
     </div>
 </template>
 <script>

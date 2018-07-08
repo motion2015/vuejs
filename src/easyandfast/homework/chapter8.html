@@ -29,20 +29,24 @@
         template: "#chariot-template",
         methods: {
             rideChariot: function (chariot) {
+                console.log('rideChariot >>' + chariot.name )
                 this.$emit('select', chariot)
             },
         },
         computed: {
             //is true when the chariot has more horses than the current one
             hasMoreHorses: function () {
+                console.log("1"+ this.current)
                 return this.current.horses < this.chariot.horses
             },
             //is true when the chariot is the current one
             isCurrent: function () {
+                console.log("2"+ this.current)
                 return this.current.name == this.chariot.name
             },
             //is true when there is no chariot current
             noChariot: function () {
+                console.log("3"+ this.current)
                 return this.current.name == null;
             },
             //define the action for each chariot
@@ -74,6 +78,7 @@
         },
         methods: {
           updateChariot: function (chariot) {
+            console.log('updateChariot')
             this.current = chariot
           }
         }

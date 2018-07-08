@@ -10,6 +10,7 @@
       {{ votes.count }}
     </p>
     <button class="btn btn-danger" @click="reset">Reset votes</button>
+    <button class="btn btn-danger" @click="stop">stop votes</button>
     <hr>
 
     <div class="row">
@@ -30,7 +31,7 @@
     <p style="font-size: 40px;">
       {{ votes }}
     </p>
-    <button class="btn btn-default" @click="vote">{{ name }}</button>
+    <button ref="myBtn" class="btn btn-default" @click="vote">{{ name }}</button>
   </div>
 </template>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
@@ -47,18 +48,29 @@ Vue.component('food', {
   },
   methods: {
     vote: function (event) {
+      console.log(5)
       // instead of using this.name
       // we can access event's element's text
       var food = event.srcElement.textContent;
       this.votes++
       bus.$emit('voted', food)
+      console.log(7)
+      
     },
     reset: function () {
+      console.log(10)
       this.votes = 0
+    },
+    stop: function () {
+      console.log(13)
+      bus.$off(['voted'])
     }
   },
   created () {
+    console.log(3)
     bus.$on('reset', this.reset)
+    bus.$on('stop', this.stop)
+    console.log(4)
   }
 })
 new Vue({
@@ -72,19 +84,32 @@ new Vue({
   methods:
   {
     countVote: function (food) {
+      console.log(6)
       this.votes.count++
       this.votes.log.push(food + ' received a vote.')
     },
     reset: function () {
+      console.log(8)
       this.votes = {
         count: 0,
         log: []
       }
+      console.log(9)
       bus.$emit('reset')
+      console.log(11)
+    },
+    stop: function (event) {
+      console.log(12)
+      console.log(event)
+      bus.$off(['voted'])
+      //bus.$off()
+      //console.log('>>>>>>>>>>>>>>>' + wrapper.find({refs: 'myBtn'}).length)
     }
   },
   created () {
+    console.log(1)
     bus.$on('voted', this.countVote)
+    console.log(2)
   }
 })
 </script>

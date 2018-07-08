@@ -8,16 +8,16 @@
     <div class="container">
       <h1>Let's hear some stories!</h1>
       <ul class="list-group">
-        <story v-for="story in stories" :story="story"></story>
+        <story v-for="story in stories" :story2="story"></story>
       </ul>
       <pre>{{ $data }}</pre>
     </div>
   </div>
   <template id="story-template">
       <li  class="list-group-item">
-          {{ story.writer }} said "{{ story.plot }}".
-          Story upvotes {{ story.upvotes }}.
-          <button v-show="!story.voted" @click="upvote"
+          {{ story2.writer }} said "{{ story2.plot }}".
+          Story upvotes {{ story2.upvotes }}.
+          <button v-show="!story2.voted" @click="upvote"
                       class="btn btn-default">Upvote</button>
           <button v-show="!isFavorite" @click="setFavorite" class="btn btn-primary">Favorite</button>
           <span v-show="isFavorite" class="glyphicon glyphicon-star pull-right" aria-hidden="true"></span>
@@ -28,21 +28,21 @@
 <script type="text/javascript">
 Vue.component('story', {
     template: "#story-template",
-    props: ['story','favorite'],
+    props: ['story2','favorite'],
     methods:{
         upvote: function(){
-            this.story.upvotes += 1;
-            this.story.voted = true;
-            //console.log(this.story)
+            this.story2.upvotes += 1;
+            this.story2.voted = true;
+            //console.log(this.story2)
         },
         setFavorite: function () {
-            //console.log(this.story)
-            this.favorite = this.story;
+            //console.log(this.story2)
+            this.favorite = this.story2;
         }
     },
     computed:{
         isFavorite:  function () {
-            return this.story == this.favorite
+            return this.story2 == this.favorite
         }
     }
 });

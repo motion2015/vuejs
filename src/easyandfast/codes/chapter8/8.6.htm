@@ -11,7 +11,7 @@
         <story v-for="story in stories"
         :story="story"
         :favorite="favorite"
-        @update="updateFavorite">
+        @update2="updateFavorite">
       </story>
     </ul>
     <pre>
@@ -48,9 +48,9 @@ Vue.component('story', {
       this.story.voted = true;
     },
     markAsFavorite: function(){
-      // 'update' is just the name of the custom event
+      // 'update2' is just the name of the custom event
       // it could be anything. ex: fav-update
-      this.$emit('update', this.story)
+      this.$emit('update2', this.story)
     },
   },
   computed:{
